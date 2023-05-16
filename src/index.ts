@@ -6,7 +6,7 @@ import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
 import { MONGO_URL, PORT } from '../config';
-import router from './router/index';
+import router from './routers/index';
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
