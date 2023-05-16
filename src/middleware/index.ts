@@ -1,6 +1,6 @@
-import { getUserBySessionToken } from 'db/users';
 import { NextFunction, Request, Response } from 'express';
 import { merge } from 'lodash';
+import { getUserBySessionToken } from '../db/users';
 
 export async function isAuthenticated(
   request: Request,
@@ -23,5 +23,6 @@ export async function isAuthenticated(
     return next();
   } catch (error) {
     console.error(error);
+    return response.sendStatus(400);
   }
 }
