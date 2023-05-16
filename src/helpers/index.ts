@@ -1,6 +1,5 @@
 import crypto from 'crypto';
-
-const SECRET = 'Erick-API';
+import { SECRET } from '../../config';
 
 export function random() {
   return crypto.randomBytes(128).toString('base64');

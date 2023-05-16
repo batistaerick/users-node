@@ -5,6 +5,12 @@ import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
+import { MONGO_URL, PORT } from '../config';
+import router from './router/index';
+
+mongoose.Promise = Promise;
+mongoose.connect(MONGO_URL);
+mongoose.connection.on('error', (error: Error) => console.log(error));
 
 const app = express()
   .use(compression())
@@ -14,16 +20,11 @@ const app = express()
     cors({
       credentials: true,
     })
-  );
+  )
+  .use('/', router());
 
 const server = http.createServer(app);
 
-server.listen(8080, () =>
+server.listen(PORT, () =>
   console.log('Server running on http://localhost:8080/')
 );
-
-const MONGO_URL = 'mongodb://localhost:27017/backend';
-
-mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL);
-mongoose.connection.on('error', (error: Error) => console.log(error));
