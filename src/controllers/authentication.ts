@@ -51,8 +51,8 @@ export async function login(request: Request, response: Response) {
     if (user.authentication?.password !== expectedHash) {
       return response.sendStatus(403);
     }
-
     const salt = random();
+
     user.authentication.sessionToken = authentication(
       salt,
       user._id.toString()
